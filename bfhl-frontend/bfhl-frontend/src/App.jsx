@@ -8,13 +8,14 @@ const App = () => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [file, setFile] = useState(null); // Declare file state
 
   const dropdownOptions = [
     { value: "alphabets", label: "Alphabets" },
     { value: "numbers", label: "Numbers" },
     { value: "highest_lowercase_alphabet", label: "Highest Lowercase Alphabet" },
   ];
-  
+
   const handleSubmit = async () => {
     setError("");
     setResponse(null);
@@ -24,18 +25,29 @@ const App = () => {
       if (!parsedInput.data) {
         throw new Error("Invalid JSON: 'data' key missing.");
       }
-  
-      // Corrected API URL
-      const apiResponse = await axios.post(
-        "https://bajaj-z4hx.vercel.app/bfhl", // Correct backend endpoint
-        parsedInput
-      );
+
+      // Add file_b64 as an empty string if no file is selected
+      const payload = file ? { ...parsedInput, file_b64: file } : parsedInput;
+
+      // Make POST request to backend
+      const apiResponse = await axios.post("https://qualifier-backend.onrender.com/bfhl", payload);
       setResponse(apiResponse.data);
     } catch (err) {
       setError(err.message || "Invalid JSON or Server Error");
     }
   };
-  
+
+  // Handle file input change
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onloadend = () => {
+        setFile(reader.result.split(",")[1]); // Set the base64 string of the file
+      };
+    }
+  };
 
   const renderResponse = () => {
     if (!response || selectedOptions.length === 0) return null;
@@ -73,6 +85,9 @@ const App = () => {
       {/* Error Display */}
       {error && <p className="error">{error}</p>}
 
+      {/* File Upload */}
+      <input type="file" onChange={handleFileChange} />
+
       {/* Response & Dropdown */}
       {response && (
         <div>
@@ -85,7 +100,7 @@ const App = () => {
             styles={{
               menu: (provided) => ({
                 ...provided,
-                color:"black",
+                color: "black",
                 zIndex: 9999, // Ensures dropdown is visible above other elements
               }),
             }}
