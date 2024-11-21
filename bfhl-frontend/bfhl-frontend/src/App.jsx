@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import "./App.css";
@@ -26,7 +26,7 @@ const App = () => {
       }
 
       // Make POST request to backend
-      const apiResponse = await axios.post("https://bajaj-z4hx.vercel.app/", parsedInput);
+      const apiResponse = await axios.post("http://localhost:5000/bfhl", parsedInput);
       setResponse(apiResponse.data);
     } catch (err) {
       setError(err.message || "Invalid JSON or Server Error");
