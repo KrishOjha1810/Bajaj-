@@ -14,7 +14,7 @@ const App = () => {
     { value: "numbers", label: "Numbers" },
     { value: "highest_lowercase_alphabet", label: "Highest Lowercase Alphabet" },
   ];
-
+  
   const handleSubmit = async () => {
     setError("");
     setResponse(null);
