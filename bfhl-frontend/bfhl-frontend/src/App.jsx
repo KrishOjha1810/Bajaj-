@@ -26,7 +26,7 @@ const App = () => {
       }
 
       // Make POST request to backend
-      const apiResponse = await axios.post("http://localhost:5000/bfhl", parsedInput);
+      const apiResponse = await axios.post("https://bajaj-z4hx.vercel.app/", parsedInput);
       setResponse(apiResponse.data);
     } catch (err) {
       setError(err.message || "Invalid JSON or Server Error");

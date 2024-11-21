@@ -5,8 +5,9 @@ const mime = require("mime-types"); // Import mime-types package
 const app = express();
 app.use(bodyParser.json());
 const cors = require("cors");
-app.use(cors());
-
+app.use(cors({
+  origin: "https://bajaj-navy-delta.vercel.app/", // Replace with your actual frontend URL
+}));
 
 // POST Endpoint
 app.post("/bfhl", (req, res) => {
@@ -72,9 +73,5 @@ function isPrime(num) {
   return true;
 }
 
-// Start Server
-const PORT = process.env.PORT || 5000 || "https://bajaj-navy-delta.vercel.app/";
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = app; // Export the app for Vercel
