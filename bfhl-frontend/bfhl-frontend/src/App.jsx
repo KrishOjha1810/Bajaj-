@@ -4,7 +4,7 @@ import Select from "react-select";
 import "./App.css";
 
 const App = () => {
-  const [jsonInput, setJsonInput] = useState("");    
+  const [jsonInput, setJsonInput] = useState("");
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
