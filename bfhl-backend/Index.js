@@ -5,13 +5,7 @@ const mime = require("mime-types"); // Import mime-types package
 const app = express();
 app.use(bodyParser.json());
 const cors = require("cors");
-
-// Configure CORS to allow requests from your frontend
-const corsOptions = {
-  origin: "https://bajaj-navy-delta.vercel.app", // Your frontend URL
-  methods: "GET,POST",
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 // POST Endpoint
 app.post("/bfhl", (req, res) => {
