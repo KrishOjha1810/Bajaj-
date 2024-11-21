@@ -24,14 +24,18 @@ const App = () => {
       if (!parsedInput.data) {
         throw new Error("Invalid JSON: 'data' key missing.");
       }
-
-      // Make POST request to backend
-      const apiResponse = await axios.post("https://bajaj-z4hx.vercel.app/", parsedInput);
+  
+      // Corrected API URL
+      const apiResponse = await axios.post(
+        "https://bajaj-z4hx.vercel.app/bfhl", // Correct backend endpoint
+        parsedInput
+      );
       setResponse(apiResponse.data);
     } catch (err) {
       setError(err.message || "Invalid JSON or Server Error");
     }
   };
+  
 
   const renderResponse = () => {
     if (!response || selectedOptions.length === 0) return null;
