@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 const cors = require("cors");
 app.use(cors({
-  origin: "https://bajaj-navy-delta.vercel.app/", // Replace with your actual frontend URL
+  origin: "https://bajaj-z4hx.vercel.app/bfhl", // Replace with your actual frontend URL
 }));
 
 // POST Endpoint
